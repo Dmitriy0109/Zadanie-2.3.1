@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Машины</title>
+</head>
+<body>
+<table class="table table-dark">
+    <tread>
+
+        <tr>
+            <th scope="col">Motor</th>
+            <th scope="col">Kuzov</th>
+            <th scope="col">kolichectvoDverei</th>
+        </tr>
+    </tread>
+    <tbody>
+    <tr th:each="car: ${car}">
+        <td th:text="${car.getMotor()}"/>
+        <td th:text="${car.getKuzov()}"/>
+        <td th:text="${car.getKolichectvoDverei()}"/>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
