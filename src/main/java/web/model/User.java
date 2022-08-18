@@ -1,16 +1,28 @@
 package web.model;
 
-public class User {
-    private long id;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "user")
+public class User {
+    @Id
+    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name = "name")
     private String name;
 
+    @Column(name="last_name")
     private String last_name;
 
+    @Column(name ="age")
     private int age;
 
-    public User(long id,String name, String last_name, int age) {
-        this.id=(long) id;
+    public User() {
+    }
+
+    public User(String name, String last_name, int age) {
         this.name = name;
         this.last_name = last_name;
         this.age = age;
@@ -20,7 +32,7 @@ public class User {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -3,34 +3,58 @@ package web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import web.Service.UsersService;
+import web.Service.UsersDAOImp;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping()
 public class UsersController {
 
-    private final UsersService usersService;
+    private final UsersDAOImp usersDAOimp;
 
     @Autowired
-    public UsersController(UsersService usersService) {
-        this.usersService = usersService;
+    public UsersController(UsersDAOImp usersDAOimp) {
+        this.usersDAOimp = usersDAOimp;
     }
 
     //Метод для получения всех User-ов
-    @GetMapping("/list")
+    @GetMapping()
     public String printUsers(Model model) {
-        model.addAttribute("users", usersService.allUsers());
+        model.addAttribute("users", usersDAOimp.allUsers());
         return "printUsers";
     }
 
     //Метод для получения конкретного User-а по id
-    @GetMapping("/{id}")
-    public String searchById(@PathVariable("id") int id, Model model) {
-        model.addAttribute("users", usersService.searchById(id));
-        return "searchById";
-    }
+//    @GetMapping("/{id}")
+//    public String searchById(@PathVariable("id") int id, Model model) {
+//        model.addAttribute("users", usersDAOimp.searchById(id));
+//        return "searchById";
+//    }
+//
+//    @GetMapping("/new")
+//    public String newUser(Model model) {
+//        model.addAttribute("users", new User());
+//        return "newUser";
+//    }
+//
+//    @PostMapping()
+//    public String createUser(@ModelAttribute("users") User user) {
+//        usersDAOimp.save(user);
+//        return "redirect:/";
+//
+//    }
+//
+//    @GetMapping("/{id}/edit")
+//    public String edit(Model model, @PathVariable("id") int id) {
+//        model.addAttribute("users", usersDAOimp.searchById(id));
+//        return "/edit";
+//
+//    }
+//
+//    @PatchMapping("/{id}")
+//    public String update(@ModelAttribute("users") User user,@PathVariable("id")int id){
+//        usersDAOimp.update(id,user);
+//        return "redirect:/";
+//    }
 }
