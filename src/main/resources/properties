@@ -8,4 +8,4 @@ db.password=admin
 # Hibernate properties
 db.dialect=org.hibernate.dialect.MySQL8Dialect
 db.show_sql=true
-db.hbm2ddl.auto=create-drop
+db.hbm2ddl.auto=update
