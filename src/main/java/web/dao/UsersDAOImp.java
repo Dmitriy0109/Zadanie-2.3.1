@@ -1,4 +1,4 @@
-package web.Dao;
+package web.dao;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import web.model.User;
@@ -9,7 +9,7 @@ import java.util.List;
 
 @Component
 @Transactional
-public class UsersDAOImp {
+public class UsersDAOImp implements UserDao{
     @PersistenceContext
     private final EntityManager entityManager;
 
@@ -33,10 +33,8 @@ public class UsersDAOImp {
     }
 
     public void update(int id, User user) {
-        User us=entityManager.find(User.class,id);
-        us.setName(user.getName());
-        us.setLast_name(user.getLast_name());
-        us.setAge(user.getAge());
+
+       entityManager.merge(user);
     }
     public void delete(int id){
         entityManager.remove(entityManager.find(User.class,id));

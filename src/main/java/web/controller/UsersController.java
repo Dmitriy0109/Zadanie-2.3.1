@@ -5,32 +5,32 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import web.Dao.UsersDAOImp;
-import web.Servises.UsersServises;
+import web.servises.UserServis;
+import web.servises.UsersServises;
 import web.model.User;
 
 @Controller
 @RequestMapping()
 public class UsersController {
 
-    private final UsersServises usersServises;
+    private final UserServis userServis;
 
     @Autowired
-    public UsersController(UsersServises usersServises) {
-        this.usersServises = usersServises;
+    public UsersController(UserServis userServis) {
+        this.userServis =  userServis;
     }
 
     //Метод для получения всех User-ов
     @GetMapping()
     public String printUsers(Model model) {
-        model.addAttribute("users", usersServises.allUsers());
+        model.addAttribute("users", userServis.allUsers());
         return "printUsers";
     }
 
 
     @GetMapping("/{id}")
     public String searchById(@PathVariable("id") int id, Model model) {
-        model.addAttribute("users", usersServises.searchById(id));
+        model.addAttribute("users", userServis.searchById(id));
         return "searchById";
     }
 
@@ -42,26 +42,26 @@ public class UsersController {
 
     @PostMapping()
     public String createUser(@ModelAttribute("users") User user) {
-        usersServises.save(user);
+        userServis.save(user);
         return "redirect:/";
 
     }
 
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("users", usersServises.searchById(id));
+        model.addAttribute("users", userServis.searchById(id));
         return "edit";
 
     }
 
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("users") User user,@PathVariable("id")int id){
-        usersServises.update(id,user);
+        userServis.update(id,user);
         return "redirect:/";
     }
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id){
-        usersServises.delete(id);
+        userServis.delete(id);
         return "redirect:/";
     }
 }
